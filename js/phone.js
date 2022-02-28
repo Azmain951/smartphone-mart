@@ -1,10 +1,17 @@
+// search button event
 const searchPhone = async () => {
     document.getElementById('no-result').style.display = 'none';
     document.getElementById('phone-details').textContent = '';
     document.getElementById('phone-details').style.display = 'none';
+
+    // getting input data
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
+
+    // spinner displayed
     toggleSpinner('block');
+
+    // fetching data from API
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
         .then(res => res.json())
@@ -14,18 +21,22 @@ const searchPhone = async () => {
 
 };
 
+// spinner function
 const toggleSpinner = displayStyle => {
     document.getElementById('spinner').style.display = displayStyle;
 };
 
+// displaying the search results on UI
 const displayPhone = phones => {
     const phoneContainer = document.getElementById('phones');
     phoneContainer.textContent = '';
 
+    // error handling
     if (phones.length === 0) {
         document.getElementById('no-result').style.display = 'block';
     }
 
+    // showing 20 search results only
     let count = 0;
     phones.forEach(phone => {
         if (count < 20) {
@@ -48,6 +59,7 @@ const displayPhone = phones => {
             return 0;
         }
     });
+    // spinner hide
     toggleSpinner('none');
 
     // if (phones.length > 20) {
@@ -59,7 +71,7 @@ const displayPhone = phones => {
     // }
 };
 
-
+// fetching phone details data using phone id from API
 const getPhoneDetails = id => {
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
@@ -67,6 +79,7 @@ const getPhoneDetails = id => {
         .then(data => displayPhoneDetails(data.data));
 };
 
+// displaying phone details on UI
 const displayPhoneDetails = phone => {
     const phoneDetailsContainer = document.getElementById('phone-details');
     phoneDetailsContainer.textContent = '';
@@ -96,7 +109,7 @@ const displayPhoneDetails = phone => {
     phoneDetailsContainer.style.display = 'block';
 };
 
-
+// release date error handling
 const checkReleaseDate = releaseDate => {
     if (releaseDate === '') {
         const text = 'No date found';
@@ -107,6 +120,7 @@ const checkReleaseDate = releaseDate => {
     }
 }
 
+// extracting sensors data
 const displaySensors = sensors => {
     let sensorList = [];
     sensors.forEach(sensor => {
@@ -116,6 +130,7 @@ const displaySensors = sensors => {
     return sensorList;
 };
 
+// extracting others properties
 const displayOthers = others => {
     let othersList = [];
     for (const prop in others) {
