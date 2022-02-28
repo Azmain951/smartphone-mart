@@ -1,5 +1,5 @@
 // search button event
-const searchPhone = async () => {
+const searchPhone = () => {
     document.getElementById('no-result').style.display = 'none';
     document.getElementById('phone-details').textContent = '';
     document.getElementById('phone-details').style.display = 'none';
