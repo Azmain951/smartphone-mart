@@ -67,10 +67,12 @@ const displayPhoneDetails = phone => {
                         <h5 class="card-title">${phone.name}</h5>
                         <p class="card-text">${checkReleaseDate(phone.releaseDate)}</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item ps-0">${phone.mainFeatures.storage}</li>
-                            <li class="list-group-item ps-0">${phone.mainFeatures.displaySize}</li>
-                            <li class="list-group-item ps-0">${phone.mainFeatures.chipSet}</li>
-                            <li class="list-group-item ps-0">${phone.mainFeatures.memory}</li>
+                            <li class="list-group-item ps-0"><span class='phone-properties'>Storage:</span> ${phone.mainFeatures.storage}</li>
+                            <li class="list-group-item ps-0"><span class='phone-properties'>Display:</span> ${phone.mainFeatures.displaySize}</li>
+                            <li class="list-group-item ps-0"><span class='phone-properties'>Chipset:</span> ${phone.mainFeatures.chipSet}</li>
+                            <li class="list-group-item ps-0"><span class='phone-properties'>Memory:</span> ${phone.mainFeatures.memory}</li>
+                            <li class="list-group-item ps-0"><span class='phone-properties'>Sensors:</span> ${displaySensors(phone.mainFeatures.sensors)}</li>
+                            <li class="list-group-item ps-0"><span class='phone-properties'>Others:</span> ${displayOthers(phone.others)}</li>
                         </ul>
                     </div>
                 </div>
@@ -89,3 +91,21 @@ const checkReleaseDate = releaseDate => {
         return releaseDate;
     }
 }
+
+const displaySensors = sensors => {
+    let sensorList = [];
+    sensors.forEach(sensor => {
+        sensorList.push(sensor);
+    });
+    sensorList = sensorList.join(', ');
+    return sensorList;
+};
+
+const displayOthers = others => {
+    let othersList = [];
+    for (const prop in others) {
+        othersList.push(others[prop]);
+    }
+    othersList = othersList.join('<br>');
+    return othersList;
+};
