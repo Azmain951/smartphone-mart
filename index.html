@@ -13,10 +13,17 @@
 
 <body class="container">
     <header>
-        <h1 class="text-center mt-4">Find Your Desired Phone Here</h1>
+        <h1 class="text-center mt-4">SmartPhone Mart</h1>
     </header>
-    <main>
 
+    <main>
+        <section class="search-section w-50 mx-auto mt-4">
+            <div class="input-group mb-3">
+                <input id="search-field" type="text" class="form-control" placeholder="find your desired phone here">
+                <button onclick="searchPhone()" class="btn btn-outline-info" type="button"
+                    id="serach-button">Search</button>
+            </div>
+        </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
