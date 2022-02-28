@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(240, 248, 255, 0.671);
+    background-color: rgba(240, 248, 255, 0.571);
 }
 
 /* Search Field Styles */
@@ -46,4 +46,5 @@ body{
 
 #no-result{
     display: none;
+    color: red;
 }
