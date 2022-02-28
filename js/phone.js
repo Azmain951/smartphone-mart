@@ -1,16 +1,21 @@
-const searchPhone = () => {
+const searchPhone = async () => {
     document.getElementById('no-result').style.display = 'none';
     document.getElementById('phone-details').textContent = '';
     document.getElementById('phone-details').style.display = 'none';
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-
+    toggleSpinner('block');
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhone(data.data));
 
     searchField.value = '';
+
+};
+
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
 };
 
 const displayPhone = phones => {
@@ -27,12 +32,12 @@ const displayPhone = phones => {
             const div = document.createElement('div');
             div.classList.add('col');
             div.innerHTML = `
-            <div class="card">
+            <div class="card phone-div">
                 <img src="${phone.image}" class="card-img-top w-75 mx-auto mt-3 p-3" alt="...">
-                <div class="card-body">
+                <div class="card-body p-4">
                     <h5 class="card-title">${phone.phone_name}</h5>
                     <p class="card-text">${phone.brand}</p>
-                    <a onclick ="getPhoneDetails('${phone.slug}')" href="#" class="btn btn-primary">Show Details</a>
+                    <a onclick ="getPhoneDetails('${phone.slug}')" href="#" class="btn details-btn">Show Details</a>
                 </div>
             </div>
         `;
@@ -43,7 +48,17 @@ const displayPhone = phones => {
             return 0;
         }
     });
+    toggleSpinner('none');
+
+    // if (phones.length > 20) {
+    //     const div = document.createElement('div');
+    //     div.innerHTML = `
+    //     <button onclick = "displayAll('${phones}')" type="button" class="btn btn-outline-primary">SEE ALL</button>
+    //     `;
+    //     phoneContainer.appendChild(div);
+    // }
 };
+
 
 const getPhoneDetails = id => {
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
@@ -64,7 +79,7 @@ const displayPhoneDetails = phone => {
                 </div>
                 <div class="col-md-8">
                     <div class="card-body p-4">
-                        <h5 class="card-title">${phone.name}</h5>
+                        <h5 class="card-title fw-bold">${phone.name}</h5>
                         <p class="card-text">${checkReleaseDate(phone.releaseDate)}</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item ps-0"><span class='phone-properties'>Storage:</span> ${phone.mainFeatures.storage}</li>
