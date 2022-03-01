@@ -92,6 +92,7 @@ const displayPhoneDetails = phone => {
                 </div>
                 <div class="col-md-8">
                     <div class="card-body p-4">
+                        <h5 class="card-title fw-bold">${phone.brand}</h5>
                         <h4 class="card-title fw-bold">${phone.name}</h4>
                         <p class="card-text"><small>${checkReleaseDate(phone.releaseDate)}</small></p>
                         <ul class="list-group list-group-flush">
